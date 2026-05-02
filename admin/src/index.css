@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+* { padding: 0; margin: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+body { min-height: 100vh; background-color: #f4f6f8; }
+
+a { text-decoration: none; color: inherit; }
+
+hr { border: none; height: 1px; background-color: #e0e0e0; }
+
+.flex-col { display: flex; flex-direction: column; }
+
+.app-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+
+.app-content { display: flex; flex: 1; }
+
+.main-content { flex: 1; overflow-y: auto; }
+
+.sidebar { width: 220px; min-height: calc(100vh - 70px); background: white; border-right: 1px solid #eee; padding: 20px 0; flex-shrink: 0; }
+
+.sidebar-options { display: flex; flex-direction: column; gap: 4px; padding: 0 12px; }
+
+.sidebar-option { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 10px; color: #555; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+
+.sidebar-option img { width: 22px; height: 22px; }
+
+.sidebar-icon { font-size: 18px; width: 22px; text-align: center; }
+
+.sidebar-option:hover { background: #f0faf0; color: #2e7d32; }
+
+.sidebar-option.active { background: #e8f5e9; color: #2e7d32; font-weight: 700; }

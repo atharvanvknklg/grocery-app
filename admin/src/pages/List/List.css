@@ -1,0 +1,26 @@
+.list-page { padding: 24px; max-width: 1000px; }
+.list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.list-header h1 { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+.list-count { color: #888; font-weight: 400; font-size: 18px; }
+.list-search { padding: 8px 16px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; outline: none; width: 250px; }
+.list-search:focus { border-color: #4caf50; }
+.list-table-wrap { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); overflow: hidden; }
+.list-table-head { display: grid; grid-template-columns: 60px 1fr 1fr 90px 70px 90px 160px; padding: 14px 16px; background: #f8f9fa; font-size: 13px; font-weight: 600; color: #666; border-bottom: 1px solid #eee; }
+.list-table-row { display: grid; grid-template-columns: 60px 1fr 1fr 90px 70px 90px 160px; padding: 12px 16px; align-items: center; border-bottom: 1px solid #f0f0f0; font-size: 14px; transition: background 0.15s; }
+.list-table-row:hover { background: #fafff9; }
+.list-table-row.unavailable { opacity: 0.5; }
+.list-table-row:last-child { border-bottom: none; }
+.list-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+.list-name { font-weight: 600; color: #1a1a2e; }
+.cat-tag { background: #e8f5e9; color: #2e7d32; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.low-stock { color: #e53935; font-weight: 700; }
+.avail-badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.avail-yes { background: #e8f5e9; color: #2e7d32; }
+.avail-no { background: #fce4ec; color: #c62828; }
+.action-btns { display: flex; gap: 8px; }
+.edit-btn { background: #e3f2fd; color: #1565c0; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.del-btn { background: #fce4ec; color: #c62828; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.save-btn { background: #4caf50; color: white; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.cancel-btn { background: #f5f5f5; color: #666; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.edit-input { width: 80px; padding: 4px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; outline: none; }
+.edit-input:focus { border-color: #4caf50; }
