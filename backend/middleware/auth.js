@@ -8,6 +8,9 @@ const authMiddleware = async (req, res, next) => {
     req.body.userId = decoded.id;
     next();
   } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return res.json({ success: false, message: "Token expired", expired: true });
+    }
     res.json({ success: false, message: "Invalid Token" });
   }
 };
