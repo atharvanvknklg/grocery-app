@@ -65,3 +65,21 @@
     font-weight: 500;
     cursor: pointer;
 }
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #aaa;
+  font-size: 13px;
+}
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.google-login-btn {
+  display: flex;
+  justify-content: center;
+}

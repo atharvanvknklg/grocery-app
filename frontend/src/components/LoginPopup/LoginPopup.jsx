@@ -3,6 +3,7 @@ import "./LoginPopup.css"
 import { assets } from "../../assets/assets"
 import { StoreContext } from "../../context/storeContext"
 import axios from "axios"
+import { GoogleLogin } from '@react-oauth/google'
 
 const LoginPopup = ({ setShowLogin }) => {
   const { url, saveToken } = useContext(StoreContext)
@@ -31,6 +32,22 @@ const LoginPopup = ({ setShowLogin }) => {
     }
   }
 
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const response = await axios.post(url + "/api/user/google", {
+        credential: credentialResponse.credential
+      })
+      if (response.data.success) {
+        saveToken(response.data.token, response.data.refreshToken, response.data.user)
+        setShowLogin(false)
+      } else {
+        setError(response.data.message)
+      }
+    } catch {
+      setError("Google login failed. Please try again.")
+    }
+  }
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target
     setData(data => ({ ...data, [name]: value }))
@@ -54,6 +71,15 @@ const LoginPopup = ({ setShowLogin }) => {
         <button type="submit" disabled={loading}>
           {loading ? "Please wait..." : currState === "Sign up" ? "Create Account" : "Login"}
         </button>
+        <div className="login-divider"><span>or</span></div>
+        <div className="google-login-btn">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError("Google login failed")}
+            width="100%"
+            text={currState === "Sign up" ? "signup_with" : "signin_with"}
+          />
+        </div>
         <div className="login-popup-condition">
           <input type="checkbox" required />
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
