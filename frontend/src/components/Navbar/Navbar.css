@@ -134,3 +134,78 @@ color:green
     }
 
 }
+/* Search Box */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 6px 14px;
+  gap: 8px;
+  border: 1px solid #ddd;
+}
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  width: 180px;
+  color: #333;
+}
+.search-box span {
+  cursor: pointer;
+  color: #888;
+  font-size: 16px;
+}
+
+/* Dark Mode Toggle */
+.dark-toggle {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 20px !important;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+body.dark-mode .navbar {
+  background: #1a1a2e;
+}
+body.dark-mode .navbar-menu a,
+body.dark-mode .navbar-menu Link {
+  color: #e0e0e0;
+}
+body.dark-mode .search-box {
+  background: #2a2a3e;
+  border-color: #444;
+}
+body.dark-mode .search-box input {
+  color: #e0e0e0;
+}
+body.dark-mode .my-orders-order,
+body.dark-mode .food-item,
+body.dark-mode .login-popup-container {
+  background: #2a2a3e;
+  color: #e0e0e0;
+}
+body.dark-mode footer {
+  background: #111;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .app { width: 95% !important; }
+  .navbar { padding: 12px 0; }
+  .navbar .logo { width: 90px; }
+  .navbar-right { gap: 12px; }
+  .navbar-right button { padding: 6px 14px; font-size: 13px; }
+  .search-box input { width: 120px; }
+  .my-orders { padding: 20px 3%; }
+  .order-top { flex-direction: column; gap: 10px; }
+  .tracking-label { font-size: 9px; }
+}

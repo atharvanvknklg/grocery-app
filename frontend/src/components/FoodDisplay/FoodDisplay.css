@@ -13,3 +13,5 @@
     row-gap: 50px;
     gap:30px;
 }
+.food-count { font-size: 16px; font-weight: 400; color: #888; }
+.no-results { text-align: center; padding: 40px; color: #888; font-size: 16px; }

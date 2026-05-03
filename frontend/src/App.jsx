@@ -8,11 +8,14 @@ import Footer from './components/Footer/Footer'
 import LoginPopup from './components/LoginPopup/LoginPopup'
 import MyOrders from './pages/MyOrders/MyOrders'
 import StoreContextProvider from './context/storeContext'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false)
   return (
     <StoreContextProvider>
+      <ToastContainer position="top-right" autoClose={2000} />
       {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 
 export const StoreContext = createContext(null);
 
@@ -10,33 +11,32 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const [user, setUser] = useState(null);
 
-  // Save token to state + localStorage
   const saveToken = (accessToken, refreshToken, userData) => {
     setToken(accessToken);
     localStorage.setItem("token", accessToken);
     if (refreshToken) localStorage.setItem("refreshToken", refreshToken);
     if (userData) { setUser(userData); localStorage.setItem("user", JSON.stringify(userData)); }
+    toast.success("Welcome back! 👋");
   };
 
-  // Refresh access token automatically
   const refreshAccessToken = useCallback(async () => {
     const storedRefresh = localStorage.getItem("refreshToken");
     if (!storedRefresh) return null;
     try {
       const res = await axios.post(url + "/api/user/refresh", { refreshToken: storedRefresh });
       if (res.data.success) {
-        saveToken(res.data.token, res.data.refreshToken, null);
+        setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        if (res.data.refreshToken) localStorage.setItem("refreshToken", res.data.refreshToken);
         return res.data.token;
       }
     } catch { }
     return null;
   }, []);
 
-  // Axios interceptor - auto refresh on 401/expired
   useEffect(() => {
     const interceptor = axios.interceptors.response.use(
       (response) => {
-        // If token expired, try refresh
         if (response.data?.expired) {
           return refreshAccessToken().then((newToken) => {
             if (newToken) {
@@ -63,14 +63,17 @@ const StoreContextProvider = (props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
+    toast.info("Logged out successfully");
   };
 
   const addToCart = async (itemId) => {
+    const item = food_list.find(f => f._id === itemId);
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
+    if (item) toast.success(`${item.name} added to cart! 🛒`, { autoClose: 1500 });
     if (token) {
       await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
     }
