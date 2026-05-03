@@ -31,4 +31,10 @@
     background-color: black;
     color: white;
     cursor: pointer;
-}
+}.image-toggle { display: flex; gap: 10px; margin-bottom: 10px; }
+.image-toggle button { padding: 6px 16px; border-radius: 6px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 13px; }
+.image-toggle button.active-tab { background: #4caf50; color: white; border-color: #4caf50; }
+.url-input-wrap { display: flex; flex-direction: column; gap: 10px; }
+.url-input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; width: 100%; }
+.url-input:focus { border-color: #4caf50; }
+.url-preview { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }

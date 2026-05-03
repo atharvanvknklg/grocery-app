@@ -3,7 +3,6 @@ import fs from "fs";
 import multer from "multer";
 import path from "path";
 
-// multer storage config
 const storage = multer.diskStorage({
   destination: "uploads",
   filename: (req, file, cb) => {
@@ -14,16 +13,24 @@ export const upload = multer({ storage });
 
 // Add food item
 export const addFood = async (req, res) => {
-  const image_filename = req.file ? req.file.filename : "";
-  const food = new foodModel({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    category: req.body.category,
-    image: image_filename,
-    stock: req.body.stock || 100,
-  });
   try {
+    let image_filename = "";
+    if (req.file) {
+      image_filename = req.file.filename;
+    } else if (req.body.imageUrl) {
+      image_filename = req.body.imageUrl; // store URL directly
+    } else {
+      return res.json({ success: false, message: "Image is required" });
+    }
+
+    const food = new foodModel({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category,
+      image: image_filename,
+      stock: req.body.stock || 100,
+    });
     await food.save();
     res.json({ success: true, message: "Food Added" });
   } catch (error) {
@@ -45,7 +52,7 @@ export const listFood = async (req, res) => {
 export const removeFood = async (req, res) => {
   try {
     const food = await foodModel.findById(req.body.id);
-    if (food && food.image) {
+    if (food && food.image && !food.image.startsWith("http")) {
       fs.unlink(`uploads/${food.image}`, (err) => {});
     }
     await foodModel.findByIdAndDelete(req.body.id);
@@ -55,7 +62,7 @@ export const removeFood = async (req, res) => {
   }
 };
 
-// Update food item (stock, price, availability)
+// Update food item
 export const updateFood = async (req, res) => {
   try {
     const updated = await foodModel.findByIdAndUpdate(req.body.id, {
